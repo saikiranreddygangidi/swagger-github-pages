@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "This is the Swagger API Documentation for Featured Location Web Application"
   version: "1.0.0"
-  title: "ConnectCompany"
+  title: "ConncetCompany"
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: "saikiranreddygangidi@gamil.com"
@@ -12,10 +12,8 @@ info:
 host: "connectcompanyapi.herokuapp.com"
 basePath: "/connectcompany/api/v1"
 tags:
-- name: "user"
+- name: "Connectcompany apis"
   description: "User Login Credentials"
-- name: "location"
-  description: "Details of All the Locations"
 
 schemes:
 - "https"
@@ -24,10 +22,10 @@ paths:
   /getAllCompanies:
     get:
       tags:
-      - "user"
+      - "getAllCompanies"
       summary: "Get a list of all the companies list"
       description: ""
-      operationId: "getUsers"
+      operationId: "getUgetAllCompanies"
       consumes:
       - "application/json"
       produces:
@@ -38,10 +36,10 @@ paths:
   /getAllEvents:
     get:
       tags:
-      - "user"
+      - "getAllEvents"
       summary: "Get a list of all the events details"
       description: ""
-      operationId: "getUsers"
+      operationId: "getAllEvents"
       consumes:
       - "application/json"
       produces:
@@ -50,22 +48,76 @@ paths:
         "200":
           description: "Get all companies details"
           
-  /getAllCompaniesByEmail/s541902:
+  /getCompaniesDetails/eventid:
     get:
       tags:
-      - "user"
-      summary: "Get a list of all the events details"
+      - "getCompaniesDetailsByEventId"
+      summary: "Get commpany details using eventid"
       description: ""
-      operationId: "getUsers"
+      operationId: "getCompaniesDetails"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       responses:
         "200":
-          description: "Get all getAllCompaniesByEmail"
-
-    
+          description: "Get commpany details using eventid"
+  /getAllEventByUid/uid:
+    get:
+      tags:
+      - "getAllEventByUid"
+      summary: "Get all Event Details by uid "
+      description: ""
+      operationId: "getAllEventByUid"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Get all event details by uid "
+  /getAllCompanies/username:
+    get:
+      tags:
+      - "getAllCompanies"
+      summary: "Get all companies Details by username "
+      description: ""
+      operationId: "getAllCompaniesbyusernamer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Get all company details by username "
+  /getAllEnrolledEvents/uid:
+    get:
+      tags:
+      - "getAllEnrolledEvents"
+      summary: "Get all enrolled event Details by uid "
+      description: ""
+      operationId: "getAllEnrolledEventsbyuid"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Get all enrolled event Details by uid"
+  /getAllnotEnrolledEvents/uid:
+    get:
+      tags:
+      - "getAllnotEnrolledEvents"
+      summary: "Get all enrolled event Details by uid "
+      description: ""
+      operationId: "getAllnotEnrolledEventsbyuid"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Get all not enrolled event Details by uid"
 
 
   /register:
@@ -73,20 +125,20 @@ paths:
 
     post:
       tags:
-      - "location"
+      - "register"
       summary: "register"
       description: ""
-      operationId: "postLocation"
+      operationId: "postRegister"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - name: "email"
-        in: "email"
+        in: "query"
         description: ""
         required: true
-        type: "email"
+        type: "string"
       - name: "username"
         in: "query"
         description: ""
@@ -105,30 +157,245 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/location"
-        
+              $ref: "#/definitions/users"
+  /addCompany:
+    
+
+    post:
+      tags:
+      - "addcompany"
+      summary: "register"
+      description: ""
+      operationId: "postCompany"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "companyName"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: "companyLocation"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+     
+      - name: "role"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      - name: "eventDate"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/companies"
+  /addEvent:
+    
+
+    post:
+      tags:
+      - "addEvent"
+      summary: "addEvent"
+      description: ""
+      operationId: "postEvent"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "EventName"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: "EventType"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+     
+      - name: "EventLocation"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      - name: "BelongsTo"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer" 
+      - name: "CreatedBy"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer" 
+      
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/events"
+
+  /addSubcribe:
+    
+
+    post:
+      tags:
+      - "addSubcribe"
+      summary: "addSubcribe"
+      description: ""
+      operationId: "postSubcribe"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
+      - name: "eventId"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
+    
+      
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/subscriptions"
+
+  /updatePassword:
+    
+
+    post:
+      tags:
+      - "updatePassword"
+      summary: "updatePassword"
+      description: ""
+      operationId: "postpassword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
+      - name: "code"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/users"
+  
+  /login:
+    
+
+    post:
+      tags:
+      - "login"
+      summary: "login"
+      description: ""
+      operationId: "postlogin"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: "code"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/users"
 
 
 definitions:
-  user:
+  users:
     type: "object"
     properties:
+      
       userName:
         type: "string"
       email:
         type: "string"
-      password:
-        type: "string"
-
-  register:
-    type: "object"
-    properties:
-      email:
-        type: "string"
       code:
         type: "string"
-      username:
+      role:
         type: "string"
+  companies:
+    type: "object"
+    properties:
+      id:
+       type: "integer"
+      companyName:
+        type: "string"
+      companyLocation:
+        type: "string"
+      userId:
+        type: "integer"
+      eventDate:
+        type: "string"
+
+  events:
+    type: "object"
+    properties:
+      eventName:
+        type: "string"
+      eventType:
+        type: "string"
+      eventLocation:
+        type: "string"
+      belongsTo:
+        type: "integer"
+      createdBy:
+        type: "integer"
+  subscriptions:
+    type: "object"
+    properties:
+      userId:
+        type: "integer"
+      eventId:
+        type: "integer"
     
 
  
